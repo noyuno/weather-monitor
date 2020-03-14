@@ -54,5 +54,8 @@ git clone https://github.com/noyuno/dotfiles
 
 ~~~
 python3 adrszEI_sample_bmp.py ADRSZEI-Displey_250x128.bmp
-python3 adrszEI_sample_namecard.py
+python3 adrszEI_sample_namecard.py 1:あいうえお 2:かきくけこ
 ~~~
+
+## 8. お天気スクリプトを実行
+

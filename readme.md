@@ -37,8 +37,11 @@ sudo usermod -aG adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,ne
 sudo apt update
 sudo apt -y upgrade
 sudo apt install -y python3-pip git libopenjp2-7 libtiff5 python3-numpy
-sudo pip3 install pillow spidev RPi.GPIO
+sudo pip3 install pillow spidev pigpio python-dotenv
 git clone https://github.com/noyuno/weather-monitor
+git clone https://github.com/waveshare/e-Paper
+cd e-Paper/RaspberryPi\&JetsonNano/python
+sudo pip3 setup.py install
 ~~~
 
 
@@ -53,9 +56,14 @@ git clone https://github.com/noyuno/dotfiles
 ## 7. サンプルスクリプトを実行
 
 ~~~
-python3 adrszEI_sample_bmp.py ADRSZEI-Displey_250x128.bmp
-python3 adrszEI_sample_namecard.py 1:あいうえお 2:かきくけこ
+cd ~/e-Paper/RaspberryPi\&JetsonNano/python/example
+python3 epd_2in13_V2_test.py
 ~~~
 
 ## 8. お天気スクリプトを実行
 
+~~~
+python3 run.py
+...
+^C
+~~~

@@ -36,8 +36,9 @@ sudo usermod -aG adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,ne
 ~~~
 sudo apt update
 sudo apt -y upgrade
-sudo apt install -y python3-pip git libopenjp2-7 libtiff5 python3-numpy
-sudo pip3 install pillow spidev pigpio python-dotenv
+sudo apt install -y python3-pip git python3-numpy python-imaging fonts-noto-cjk
+sudo pip3 install spidev pigpio
+sudo pip3 install -r requirements.txt
 git clone https://github.com/noyuno/weather-monitor
 git clone https://github.com/waveshare/e-Paper
 cd e-Paper/RaspberryPi\&JetsonNano/python

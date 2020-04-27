@@ -1,1 +1,6 @@
 .env
+config.yml
+test
+__pycache__
+logs
+data

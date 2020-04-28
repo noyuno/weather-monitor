@@ -37,7 +37,7 @@ class Monitor():
       'emoji': {},
     }
     self.font_file_dirs = [
-      os.getcwd() + '/' + os.path.dirname(__file__) + '/fonts',
+      os.path.dirname(__file__) + '/fonts',
       '/usr/share/fonts/opentype/noto',
       '/usr/share/fonts/noto',
     ]

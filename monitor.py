@@ -16,10 +16,6 @@ import emoji
 import wemoji
 from PIL import Image, ImageDraw, ImageFont
 
-font_file = '/usr/share/fonts/noto/NotoSansCJK-Regular.ttc'
-emoji_file = '/usr/share/fonts/noto/NotoEmoji-Regular.ttf'
-color_emoji_file = '/usr/share/fonts/noto/NotoColorEmoji.ttf'
-
 if not os.environ.get('DEBUG'):
   from waveshare_epd import epd2in13_V2
 
@@ -40,6 +36,29 @@ class Monitor():
       'japanese': {},
       'emoji': {},
     }
+    self.font_file_dirs = [
+      '/usr/share/fonts/noto',
+      '/usr/share/fonts/opentype/noto'
+    ]
+    self.font_file_names = {
+      'japanese': 'NotoSansCJK-Regular.ttc',
+      'emoji': 'NotoEmoji-Regular.ttf'
+    }
+    self.font_files = {}
+    for (name, filename) in self.font_file_names.items():
+      for dir in self.font_file_dirs:
+        if os.path.exists(f'{dir}/{filename}'):
+          self.font_files[name] = f'{dir}/{filename}'
+          break
+    # check
+    for name in self.font_file_names.keys():
+      if not self.font_files.get(name):
+        raise Exception(f'font file not found: {name}')
+
+    missing = list(filter(lambda n: not self.font_files.get(n), self.font_file_names))
+    if len(missing) > 0:
+      raise Exception('font file not found: {%s}' % (' '.join(missing)))
+
     for s in self.font_size:
       self.fonts['japanese'][s] = ImageFont.truetype(font_file, s)
       self.fonts['emoji'][s] = ImageFont.truetype(emoji_file, s)

@@ -45,26 +45,19 @@ cd e-Paper/RaspberryPi\&JetsonNano/python
 sudo pip3 setup.py install
 ~~~
 
-
-## 6. エディタ等のインストール
-
-~~~
-sudo apt install -y zsh vim tmux
-git clone https://github.com/noyuno/dotfiles
-./dotfiles/bin/dfdeploy
-~~~
-
-## 7. サンプルスクリプトを実行
+## 6. サンプルスクリプトを実行
 
 ~~~
 cd ~/e-Paper/RaspberryPi\&JetsonNano/python/example
 python3 epd_2in13_V2_test.py
 ~~~
 
-## 8. お天気スクリプトを実行
+## 7. お天気スクリプトを実行
 
 ~~~
 pip3 install -r requirements.txt
+cp .env.example .env
+nano .env
 python3 run.py
 ...
 ^C

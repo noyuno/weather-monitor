@@ -36,7 +36,7 @@ sudo usermod -aG adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,ne
 ~~~
 sudo apt update
 sudo apt -y upgrade
-sudo apt install -y python3-pip git python3-numpy python-imaging fonts-noto-cjk
+sudo apt install -y python3-pip git python3-numpy python-pil fonts-noto-cjk
 sudo pip3 install spidev pigpio
 sudo pip3 install -r requirements.txt
 git clone https://github.com/noyuno/weather-monitor
@@ -64,6 +64,7 @@ python3 epd_2in13_V2_test.py
 ## 8. お天気スクリプトを実行
 
 ~~~
+pip3 install -r requirements.txt
 python3 run.py
 ...
 ^C

@@ -12,7 +12,7 @@ import util
 
 
 class Weather():
-  def __init__(self, logger, owm_apikey, name, lat, lon, kishodai, city):
+  def __init__(self, logger, owm_apikey, name, lat, lon, kishodai, city, datadir):
     self.logger = logger
     self.name = name
     self.kishodai = kishodai
@@ -21,11 +21,11 @@ class Weather():
     self.keiho = []
     self.keikai = []
     self.last_update = None
-    self.owm_filename = f'/data/{self.name}-onecall.json'
+    self.owm_filename = f'{datadir}/{self.name}-onecall.json'
     self.owm_url = f'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={owm_apikey}'
-    self.keiho_filename = f'/data/{self.name}-extra_l.xml'
+    self.keiho_filename = f'{datadir}/{self.name}-extra_l.xml'
     self.keiho_url = 'http://www.data.jma.go.jp/developer/xml/feed/extra_l.xml'
-    self.keiho_denbun_filename = f'/data/{self.name}-keiho-denbun.xml'
+    self.keiho_denbun_filename = f'{datadir}/{self.name}-keiho-denbun.xml'
     self.dtformat = '%Y%m%d-%H%M'
 
   def update_file2(self, filename, url):

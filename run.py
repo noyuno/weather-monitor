@@ -25,8 +25,8 @@ import monitor
 import util
 import weather
 
-def initlogger(name):
-    logdir = f'/logs'
+def initlogger(name, logdir):
+    logdir = f'/logs' if os.environ.get('DEBUG') else f'logs'
     os.makedirs(logdir, exist_ok=True)
     starttime = datetime.now().strftime('%Y%m%d-%H%M')
     logging.getLogger().setLevel(logging.WARNING)
@@ -37,7 +37,7 @@ def initlogger(name):
         logger.setLevel(logging.INFO)
     logFormatter = logging.Formatter(fmt='%(asctime)s %(levelname)s: %(message)s',
                                      datefmt='%Y%m%d-%H%S')
-    fileHandler = logging.FileHandler('/{}/{}'.format(logdir, starttime))
+    fileHandler = logging.FileHandler('{}/{}'.format(logdir, starttime))
     fileHandler.setFormatter(logFormatter)
     logger.addHandler(fileHandler)
     consoleHandler = logging.StreamHandler()
@@ -46,10 +46,10 @@ def initlogger(name):
     return logger, starttime
     
 class Main():
-  def __init__(self, logger):
+  def __init__(self, logger, datadir):
     self.logger = logger
     self.weather = weather.Weather(self.logger, os.environ['OWM_API_KEY'], 'default',
-      os.environ['LAT'], os.environ['LON'], os.environ['KISHODAI'], os.environ['CITY'])
+      os.environ['LAT'], os.environ['LON'], os.environ['KISHODAI'], os.environ['CITY'], datadir)
     self.monitor = monitor.Monitor(self.logger, self.weather)
     self.weather.update()
     self.monitor.clear()
@@ -74,7 +74,11 @@ def termed(signum, frame):
 if __name__ == "__main__":
   # log
   name = 'weather-monitor'
-  logger, starttime = initlogger(name)
+  datadir = f'/data' if os.environ.get('DEBUG') else f'data'
+  logdir = f'/logs' if os.environ.get('DEBUG') else f'logs'
+  os.makedirs(datadir, exist_ok=True)
+  os.makedirs(logdir, exist_ok=True)
+  logger, starttime = initlogger(name, logdir)
   logger.info(f'started {name} at {starttime}')
 
   # env
@@ -90,5 +94,5 @@ if __name__ == "__main__":
   signal.signal(signal.SIGTERM, termed)
 
   # main
-  main = Main(logger)
+  main = Main(logger, datadir)
   main.run()

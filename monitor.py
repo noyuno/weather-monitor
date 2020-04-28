@@ -45,23 +45,20 @@ class Monitor():
       'emoji': 'NotoEmoji-Regular.ttf'
     }
     self.font_files = {}
+    # check
     for (name, filename) in self.font_file_names.items():
       for dir in self.font_file_dirs:
         if os.path.exists(f'{dir}/{filename}'):
           self.font_files[name] = f'{dir}/{filename}'
           break
-    # check
-    for name in self.font_file_names.keys():
-      if not self.font_files.get(name):
-        raise Exception(f'font file not found: {name}')
-
     missing = list(filter(lambda n: not self.font_files.get(n), self.font_file_names))
     if len(missing) > 0:
-      raise Exception('font file not found: {%s}' % ([self.font_file_names[m] for m in missing]))
-
+      raise Exception('font file not found: {%s}' % (' '.join([self.font_file_names[m] for m in missing])))
+    # initialize fonts
     for s in self.font_size:
-      self.fonts['japanese'][s] = ImageFont.truetype(font_file, s)
-      self.fonts['emoji'][s] = ImageFont.truetype(emoji_file, s)
+      for n, p in self.font_files.items():
+        self.fonts[n] = ImageFont.truetype(p, s)
+
     self.imagefile = '/data/image.png'
 
   def clear(self):

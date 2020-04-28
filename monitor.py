@@ -37,8 +37,9 @@ class Monitor():
       'emoji': {},
     }
     self.font_file_dirs = [
+      os.getcwd() + '/' + os.path.dirname(__file__) + '/fonts',
+      '/usr/share/fonts/opentype/noto',
       '/usr/share/fonts/noto',
-      '/usr/share/fonts/opentype/noto'
     ]
     self.font_file_names = {
       'japanese': 'NotoSansCJK-Regular.ttc',
@@ -53,11 +54,11 @@ class Monitor():
           break
     missing = list(filter(lambda n: not self.font_files.get(n), self.font_file_names))
     if len(missing) > 0:
-      raise Exception('font file not found: {%s}' % (' '.join([self.font_file_names[m] for m in missing])))
+      raise Exception('font file not found: %s' % (' '.join([self.font_file_names[m] for m in missing])))
     # initialize fonts
     for s in self.font_size:
       for n, p in self.font_files.items():
-        self.fonts[n] = ImageFont.truetype(p, s)
+        self.fonts[n][s] = ImageFont.truetype(p, s)
 
     self.imagefile = '/data/image.png'
 

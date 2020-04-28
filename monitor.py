@@ -57,7 +57,7 @@ class Monitor():
 
     missing = list(filter(lambda n: not self.font_files.get(n), self.font_file_names))
     if len(missing) > 0:
-      raise Exception('font file not found: {%s}' % (' '.join(missing)))
+      raise Exception('font file not found: {%s}' % ([self.font_file_names[m] for m in missing]))
 
     for s in self.font_size:
       self.fonts['japanese'][s] = ImageFont.truetype(font_file, s)

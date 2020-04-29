@@ -31,8 +31,7 @@ class Weather():
   def update_file2(self, filename, url):
     r = requests.get(url)
     if r.status_code != 200:
-      self.logger.exception('returned code %d' % (r.status_code))
-      return -1
+      raise Exception(f'requests.get(): returned code {r.status_code}, filename={filename}, url={url}')
     f = open(filename, 'wb')
     f.write(r.content)
     f.close()

@@ -36,7 +36,7 @@ def initlogger(name, logdir):
     else:
         logger.setLevel(logging.INFO)
     logFormatter = logging.Formatter(fmt='%(asctime)s %(levelname)s: %(message)s',
-                                     datefmt='%Y%m%d-%H%S')
+                                     datefmt='%Y%m%d-%H%M')
     fileHandler = logging.FileHandler('{}/{}'.format(logdir, starttime))
     fileHandler.setFormatter(logFormatter)
     logger.addHandler(fileHandler)

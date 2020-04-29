@@ -70,5 +70,5 @@ sudo cp weather-monitor.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl start weather-monitor
 sudo systemctl status $_
-sudo systemctl enable $_
+journalctl -xefu weather-monitor
 ~~~

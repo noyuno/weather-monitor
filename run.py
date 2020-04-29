@@ -50,7 +50,7 @@ class Main():
     self.logger = logger
     self.weather = weather.Weather(self.logger, os.environ['OWM_API_KEY'], 'default',
       os.environ['LAT'], os.environ['LON'], os.environ['KISHODAI'], os.environ['CITY'], datadir)
-    self.monitor = monitor.Monitor(self.logger, self.weather, os.environ.get('DARK') is not None)
+    self.monitor = monitor.Monitor(self.logger, self.weather, os.environ.get('DARK') is not None, datadir)
     self.weather.update()
     self.monitor.clear()
 

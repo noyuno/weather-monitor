@@ -23,7 +23,7 @@ def ctemp(atemp):
   return int(float(atemp) - 273.15)
 
 class Monitor():
-  def __init__(self, logger, weather, dark):
+  def __init__(self, logger, weather, dark, datadir):
     self.logger = logger
     self.weather = weather
     self.width = 250
@@ -60,7 +60,7 @@ class Monitor():
       for n, p in self.font_files.items():
         self.fonts[n][s] = ImageFont.truetype(p, s)
 
-    self.imagefile = '/data/image.png'
+    self.imagefile = f'{datadir}/image.png'
     self.draw = None
 
     if dark:

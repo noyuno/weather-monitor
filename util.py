@@ -2,10 +2,10 @@ from datetime import datetime, timezone, timedelta
 import os
 import sys
 
-def environ(keys, header):
+def environ(keys, header, allow_empty):
     ret = False
     for k in keys:
-        if os.environ.get(k) is None:
+        if os.environ.get(k) is None or (os.environ.get(k) == '' and not allow_empty):
             ret = True
             print('{0}: {1} is not set'.format(header, k), file=sys.stderr)
     return ret

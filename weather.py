@@ -21,6 +21,7 @@ class Weather():
     self.keiho = []
     self.keikai = []
     self.last_update = None
+    self.last_update_file = f'{datadir}/last_update'
     self.owm_filename = f'{datadir}/{self.name}-onecall.json'
     self.owm_url = f'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={owm_apikey}'
     self.keiho_filename = f'{datadir}/{self.name}-extra_l.xml'
@@ -38,9 +39,8 @@ class Weather():
     return 0
 
   def update_file(self):
-    last_update_file = '/data/last_update'
-    if os.path.exists(last_update_file):
-      self.last_update = datetime.strptime(open(last_update_file).read(), self.dtformat)
+    if os.path.exists(self.last_update_file):
+      self.last_update = datetime.strptime(open(self.last_update_file).read(), self.dtformat)
       if self.last_update.timestamp() + 60 * 30 > datetime.now().timestamp():
         self.logger.warning('update_file(): < 30 min, too quickly update, ignore')
         return
@@ -50,7 +50,7 @@ class Weather():
       self.update_file2(self.keiho_filename, self.keiho_url)
       self.update_file2(self.keiho_denbun_filename, self.update_file_keiho())
 
-      f = open(last_update_file, 'w')
+      f = open(self.last_update_file, 'w')
       self.last_update = datetime.now()
       f.write(str(self.last_update.strftime(self.dtformat)))
       f.close()

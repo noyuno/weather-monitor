@@ -62,3 +62,13 @@ python3 run.py
 ...
 ^C
 ~~~
+
+## 8. Systemctl に登録
+
+~~~
+sudo cp weather-monitor.service /etc/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl start weather-monitor
+sudo systemctl status $_
+sudo systemctl enable $_
+~~~

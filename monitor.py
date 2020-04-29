@@ -206,13 +206,13 @@ class Monitor():
         #self.epd.displayPartial(self.epd.getbuffer(image))
 
       # debug
-      image.save(self.imagefile)
+      # image.save(self.imagefile)
       
-      buffered = io.BytesIO()
-      image.save(buffered, format='PNG')
-      image_byte = buffered.getvalue()
-      image_b64 = base64.b64encode(image_byte)
-      image_b64s = image_b64.decode('utf-8')
+      # buffered = io.BytesIO()
+      # image.save(buffered, format='PNG')
+      # image_byte = buffered.getvalue()
+      # image_b64 = base64.b64encode(image_byte)
+      # image_b64s = image_b64.decode('utf-8')
 
       # url = 'http://notifyd:5050' if os.environ.get('DEBUG') else 'localhost:5050'
       # requests.post(url, json={

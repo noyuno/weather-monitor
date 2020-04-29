@@ -67,6 +67,7 @@ class Monitor():
     if self.enable_epd:
       self.epd.init(self.epd.FULL_UPDATE)
       self.epd.Clear(0x00)
+      self.epd.init(self.epd.PART_UPDATE)
     else:
       im = Image.new('1', (self.width, self.height))
       im.save(self.imagefile)

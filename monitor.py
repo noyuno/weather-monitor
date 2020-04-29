@@ -67,7 +67,7 @@ class Monitor():
     if self.enable_epd:
       self.epd.init(self.epd.FULL_UPDATE)
       self.epd.Clear(0x00)
-      self.epd.init(self.epd.PART_UPDATE)
+      #self.epd.init(self.epd.PART_UPDATE)
     else:
       im = Image.new('1', (self.width, self.height))
       im.save(self.imagefile)
@@ -195,7 +195,8 @@ class Monitor():
       self.draw_main_keiho()
 
       if self.enable_epd:
-        self.epd.displayPartial(self.epd.getbuffer(image))
+        self.epd.display(self.epd.getbuffer(image.rotate(180)))
+        #self.epd.displayPartial(self.epd.getbuffer(image))
 
       # debug
       image.save(self.imagefile)

@@ -23,7 +23,7 @@ def ctemp(atemp):
   return int(float(atemp) - 273.15)
 
 class Monitor():
-  def __init__(self, logger, weather):
+  def __init__(self, logger, weather, dark):
     self.logger = logger
     self.weather = weather
     self.width = 250
@@ -63,10 +63,17 @@ class Monitor():
     self.imagefile = '/data/image.png'
     self.draw = None
 
+    if dark:
+      self.background_color = 0
+      self.foreground_color = 255
+    else:
+      self.background_color = 255
+      self.foreground_color = 0
+
   def clear(self):
     if self.enable_epd:
       self.epd.init(self.epd.FULL_UPDATE)
-      self.epd.Clear(0x00)
+      self.epd.Clear(self.background_color)
       #self.epd.init(self.epd.PART_UPDATE)
     else:
       im = Image.new('1', (self.width, self.height))
@@ -93,7 +100,7 @@ class Monitor():
     n = 0
     for c in str(text):
       f = 'emoji' if c in emoji.UNICODE_EMOJI else 'japanese'
-      self.draw.text((x, y - ts[n][1]), c, font=self.fonts[f][size], fill=255)
+      self.draw.text((x, y - ts[n][1]), c, font=self.fonts[f][size], fill=self.foreground_color)
       x += ts[n][0]
       n += 1
     return ts
@@ -187,7 +194,7 @@ class Monitor():
 
   def update(self):
     try:
-      image = Image.new('1', (self.width, self.height), 0)
+      image = Image.new('1', (self.width, self.height), self.background_color)
       self.draw = ImageDraw.Draw(image)
       #self.emoji_test()
       self.draw_main_current()

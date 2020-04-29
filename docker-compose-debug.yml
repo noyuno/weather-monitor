@@ -1,5 +1,13 @@
 version: "3"
 services:
+  weather-monitor:
+    build: .
+    volumes:
+      - ./:/opt/weather-monitor
+      - ./data/weather-monitor:/data/weather-monitor
+      - ./logs/weather-monitor:/logs/weather-monitor
+    links:
+      - notifyd
   notifyd:
     image: noyuno/notifyd
     #build: notifyd

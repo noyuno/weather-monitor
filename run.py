@@ -26,7 +26,6 @@ import util
 import weather
 
 def initlogger(name, logdir):
-    logdir = f'/logs' if os.environ.get('DEBUG') else f'logs'
     os.makedirs(logdir, exist_ok=True)
     starttime = datetime.now().strftime('%Y%m%d-%H%M')
     logging.getLogger().setLevel(logging.WARNING)
@@ -74,8 +73,8 @@ def termed(signum, frame):
 if __name__ == "__main__":
   # log
   name = 'weather-monitor'
-  datadir = f'/data' if os.environ.get('DEBUG') else f'data'
-  logdir = f'/logs' if os.environ.get('DEBUG') else f'logs'
+  datadir = f'/data/{name}' if os.environ.get('DEBUG') else f'data/{name}'
+  logdir = f'/logs/{name}' if os.environ.get('DEBUG') else f'logs/{name}'
   os.makedirs(datadir, exist_ok=True)
   os.makedirs(logdir, exist_ok=True)
   logger, starttime = initlogger(name, logdir)

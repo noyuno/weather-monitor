@@ -84,8 +84,8 @@ if __name__ == "__main__":
   # env
   envse = ['NOTIFYD_TOKEN', 'OWM_API_KEY', 'LAT', 'LON', 'KISHODAI', 'CITY']
   envsc = []
-  f = util.environ(envse, 'error')
-  util.environ(envsc, 'warning')
+  f = util.environ(envse, 'error', False)
+  util.environ(envsc, 'warning', False)
   if f:
     logger.error('error: some environment variables are not set. exiting.')
     sys.exit(1)

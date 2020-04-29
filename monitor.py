@@ -61,6 +61,7 @@ class Monitor():
         self.fonts[n][s] = ImageFont.truetype(p, s)
 
     self.imagefile = '/data/image.png'
+    self.draw = None
 
   def clear(self):
     if self.enable_epd:
@@ -91,7 +92,7 @@ class Monitor():
     n = 0
     for c in str(text):
       f = 'emoji' if c in emoji.UNICODE_EMOJI else 'japanese'
-      self.draw.text((x, y - ts[n][1]), c, font=self.fonts[f][size], fill = 0)
+      self.draw.text((x, y - ts[n][1]), c, font=self.fonts[f][size], fill=255)
       x += ts[n][0]
       n += 1
     return ts
@@ -185,7 +186,7 @@ class Monitor():
 
   def update(self):
     try:
-      image = Image.new('1', (self.width, self.height), 255)
+      image = Image.new('1', (self.width, self.height), 0)
       self.draw = ImageDraw.Draw(image)
       #self.emoji_test()
       self.draw_main_current()
@@ -193,7 +194,7 @@ class Monitor():
       self.draw_main_keiho()
 
       if self.enable_epd:
-        epd.displayPartial(epd.getbuffer(image))
+        self.epd.displayPartial(self.epd.getbuffer(image))
 
       # debug
       image.save(self.imagefile)

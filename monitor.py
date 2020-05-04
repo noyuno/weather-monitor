@@ -153,9 +153,9 @@ class Monitor():
       self.drawText(x, y + 25, wemoji.weather(list(map(lambda s: s['id'], f['weather']))), size=22, align='center')
       self.drawText(x, y + 35, '%s%d%s' % ('', ctemp(f['feels_like']), 'C'), align='center')
       if f.get('snow'):
-        self.drawText(x, y + 45, '%s%d%s' % ('❄', int(f['snow']), 'cm'), align='center')
+        self.drawText(x, y + 45, '%s%d%s' % ('❄', int(f['snow']['1h']), 'cm'), align='center')
       elif f.get('rain'):
-        self.drawText(x, y + 45, '%s%d%s' % ('☔', int(f['rain']), 'mm'), align='center')
+        self.drawText(x, y + 45, '%s%d%s' % ('☔', int(f['rain']['1h']), 'mm'), align='center')
 
       x += width
       if x + width / 2 > self.width:

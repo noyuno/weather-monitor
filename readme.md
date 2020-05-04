@@ -1,5 +1,7 @@
 # お天気モニタ
 
+![image](https://raw.githubusercontent.com/noyuno/weather-monitor/master/image.jpg)
+
 ## 1. 要件
 
 1. Raspberry Pi Zero

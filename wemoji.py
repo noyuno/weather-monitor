@@ -47,9 +47,9 @@ def _weather(s):
     return 
   elif s[0] == '7':
     return atmosphere
-  elif id >= 800 and id <= 801:
+  elif id == 800:
     return clearSky
-  elif id >= 802 and id <= 803:
+  elif id >= 801 and id <= 803:
     return fewClouds
   elif id == 804:
     return clouds

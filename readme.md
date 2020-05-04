@@ -72,3 +72,12 @@ sudo systemctl start weather-monitor
 sudo systemctl status $_
 journalctl -xefu weather-monitor
 ~~~
+
+## 9. notifydでサーバ死活監視
+
+~~~
+curl -sSL https://get.docker.com | sh
+sudo apt -y install docker-compose pass gnupg2
+docker login
+docker-compose up
+~~~

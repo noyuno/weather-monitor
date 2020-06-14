@@ -9,7 +9,7 @@ import sys
 import time
 import traceback
 from datetime import datetime
-import socket
+import subprocess
 
 import requests
 import emoji
@@ -107,7 +107,7 @@ class Monitor():
     return ts
 
   def draw_main_current(self):
-    ipaddr = socket.gethostbyname(socket.gethostname())
+    ipaddr = subprocess.check_output('hostname -I | awk \'{print$1}\'', shell=True).decode('utf-8').replace('\n', '')
     now = datetime.now()
     stime = '%m/%d %H:%M'
     date = 'N' + now.strftime(stime)

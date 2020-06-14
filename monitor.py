@@ -172,6 +172,7 @@ class Monitor():
     for c in text:
       if xinit + x + 13 > self.width:
         y += 13
+        x = 0
         keiho2 = True
       ts = self.drawText(xinit + x, yinit + y, c, size=13)
       x += ts[0][0]

@@ -9,6 +9,7 @@ import sys
 import time
 import traceback
 from datetime import datetime
+import socket
 
 import requests
 import emoji
@@ -106,14 +107,16 @@ class Monitor():
     return ts
 
   def draw_main_current(self):
+    ipaddr = socket.gethostbyname(socket.gethostname())
     now = datetime.now()
     stime = '%m/%d %H:%M'
     date = 'N' + now.strftime(stime)
-    if self.weather.last_update is not None:
+    if self.weather.last_update is not None and \
+      now.strftime(stime) != self.weather.last_update.strftime(stime):
       date += ' U' + self.weather.last_update.strftime(stime)
     if self.logger.level == logging.DEBUG:
       date += ' D'
-    self.drawText(self.width - 3, 13, date, align='right')
+    self.drawText(self.width - 3, 13, f'${ipaddr} ${date}', align='right')
     
     yoffset = 12
     xoffset = 10
